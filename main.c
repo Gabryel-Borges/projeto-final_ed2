@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+int rep = 1;
+
 // Estrutura de um livro
 typedef struct Livro {
     char titulo[50];
@@ -199,7 +201,11 @@ void listarTodosLivros(Livro *raiz) {
 
 // Lista os 5 primeiros livros mais bem avaliados (ordem decrescente)
 void mostrarLivrosMaisRecomendadosRec(Livro *raiz, int *rep) {
-    if (raiz == NULL || *rep > 5) {
+    if (raiz == NULL) {
+        return;
+    }
+    if (*rep > 5) {
+        *rep = 1;
         return;
     }
 
@@ -213,13 +219,6 @@ void mostrarLivrosMaisRecomendadosRec(Livro *raiz, int *rep) {
 
     mostrarLivrosMaisRecomendadosRec(raiz->esquerda, rep);
 }
-
-// função controladora
-void mostrarLivrosMaisRecomendados(Livro *raiz) {
-    int rep = 1; // Controlador do número de livros impressos
-    mostrarLivrosMaisRecomendadosRec(raiz, &rep);
-}
-
 
 //FUNÇÕES REFERENTES AOS USUÁRIOS
 
@@ -260,7 +259,7 @@ void inserirUsuario(const char *nome, const char *livroFavorito, Livro *raiz) {
         printf("\n");
 
         if (res[0] == 'y') {
-            mostrarLivrosMaisRecomendados(raiz);
+            mostrarLivrosMaisRecomendadosRec(raiz, &rep);
             printf("\n1 - Escolher livro\n");
             printf("2 - Sair\n");
             printf("\nSelecione uma opcao: ");
@@ -317,6 +316,8 @@ Usuario *procurarUsuario(const char *nome) {
 }
 
 int main() {
+    
+    
 
     // Criar árvore de livros
     Livro *raiz = NULL;
@@ -331,12 +332,10 @@ int main() {
     inserirLivro(&raiz, "Guerra e Paz", "Liev Tolstoi", 3.1, 2100);
     inserirLivro(&raiz, "Orgulho e Preconceito", "Jane Austen", 4.8, 4100);
     inserirLivro(&raiz, "O Pequeno Principe", "Antoine de Saint-Exupery", 5.0, 3500);
-    
-
+  
     // Imprimir os livros ordenados
     printf("Lista os livros por ordem de avaliacao:\n");
     listarTodosLivros(raiz);
-
 
     removerLivro(&raiz, "Orgulho e Preconceito");
 
