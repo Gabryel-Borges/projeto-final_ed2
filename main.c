@@ -231,6 +231,11 @@ unsigned int hashUsers(const char *str) {
     return hash % TAMANHO_HASH_USERS;
 }
 
+void limparBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF); // Consome até o final da linha ou EOF
+}
+
 // Inserir usuário na tabela hash
 void inserirUsuario(const char *nome, const char *livroFavorito, Livro *raiz) {
     unsigned int indice = hashUsers(nome);
@@ -244,14 +249,14 @@ void inserirUsuario(const char *nome, const char *livroFavorito, Livro *raiz) {
         strcpy(novoUsuario->livroFavorito, livroFavorito);
     }
     else {
-        char res[2]; // respostas dos usuários
+        char res[2];
         char titulo[50];
         int controller = 1;
 
         printf("\n'%s' nao existe no sistema\n\n", livroFavorito);
         printf("Deseja ver nossos livros recomendados? (y/n): ");
-        fflush(stdin);
         scanf("%c", &res[0]);
+        limparBuffer();
         printf("\n");
 
         if (res[0] == 'y') {
@@ -259,13 +264,12 @@ void inserirUsuario(const char *nome, const char *livroFavorito, Livro *raiz) {
             printf("\n1 - Escolher livro\n");
             printf("2 - Sair\n");
             printf("\nSelecione uma opcao: ");
-            fflush(stdin);
             scanf("%c", &res[1]);
+            limparBuffer();
 
             if (res[1] == '1') {
                 do {
                     printf("\nDigite o titulo do livro que deseja: ");
-                    fflush(stdin);
                     fgets(titulo, sizeof(titulo), stdin);
 
                     // Remove o '\n' do final da string, se necessário
@@ -347,18 +351,6 @@ int main() {
 
     if (usuario1)
         printf("\nUsuario: %s, Livro Favorito: %s\n", usuario1->nome, usuario1->livroFavorito);
-    else
-        printf("\nUsuario nao encontrado.\n");
-
-
-    // Inserir usuários na tabela hash
-    inserirUsuario("Rafael", "1984", raiz);
-
-    // Procurar um usuário e exibir seu livro favorito
-    Usuario *usuario2 = procurarUsuario("Rafael");
-
-    if (usuario2)
-        printf("\nUsuario: %s, Livro Favorito: %s\n", usuario2->nome, usuario2->livroFavorito);
     else
         printf("\nUsuario nao encontrado.\n");
 
