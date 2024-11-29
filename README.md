@@ -2,6 +2,12 @@
 
 Este projeto implementa um sistema de recomendação de livros baseado na nota dos usuários e número de avaliações.
 
+## Integrantes
+
+- **Gabryel Borges**
+- **Rafael Bernardes**
+- **Itamar Rocha**
+
 ## Estrutura do Código
 
 O projeto está estruturado com funções modulares que podem ser modificadas para atender diferentes requisitos de número de dados.
