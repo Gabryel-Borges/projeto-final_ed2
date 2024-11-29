@@ -4,7 +4,7 @@ Este projeto implementa um sistema de recomendação de livros baseado na nota d
 
 ## Estrutura do Código
 
-O projeto está estruturando com funções modulares que podem ser modificadas para atender diferentes requisitos de número de dados.
+O projeto está estruturado com funções modulares que podem ser modificadas para atender diferentes requisitos de número de dados.
 
 ### Estrutura de Dados Utilizadas
 
